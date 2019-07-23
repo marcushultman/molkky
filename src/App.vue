@@ -1,18 +1,26 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <UsersInput :users.sync="users"/>
+    <hr>
+    <UserCounter v-for="(user, index) in users" :user="user" :key="index"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import UsersInput from './components/UsersInput.vue'
+import UserCounter from './components/UserCounter.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
-  }
+    UsersInput,
+    UserCounter,
+  },
+  data() {
+    return {
+      users: [],
+    };
+  },
 }
 </script>
 
@@ -23,6 +31,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
