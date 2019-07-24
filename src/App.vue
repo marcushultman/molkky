@@ -2,7 +2,8 @@
   <div id="app">
     <UsersInput :users.sync="users"/>
     <hr>
-    <UserCounter v-for="(user, index) in users" :user="user" :key="index"/>
+    <UserCounter v-for="(user, index) in users" :key="index"
+        :user="user" :active="user === activeUser" @turn="activeUser = user"/>
   </div>
 </template>
 
@@ -19,6 +20,7 @@ export default {
   data() {
     return {
       users: [],
+      activeUser: null,
     };
   },
 }
