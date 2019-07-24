@@ -3,11 +3,11 @@
     <input class="name" v-model="user.name">
     <h2>{{ user.points }}</h2>
     <template v-if="user.points > 50">
-      <button @click="user.points = 25" class="reset">Reset to 25</button>
+      <button @click="setPoints(25)" class="reset">Reset to 25</button>
     </template>
     <template v-else>
-      <button @click="user.points += 1">👍1</button>
-      <button @click="user.points += 5">🖐5</button>
+      <button @click="addPoints(1)">👍1</button>
+      <button @click="addPoints(5)">🖐5</button>
     </template>
     <button class="miss" @click="miss">
       <span>Misses:&nbsp;</span>
@@ -27,6 +27,13 @@ export default {
     };
   },
   methods: {
+    setPoints(points) {
+      this.user.points = points;
+      this.user.misses = 0;
+    },
+    addPoints(points) {
+      this.setPoints(this.user.points + points);
+    },
     miss() {
       if (++this.user.misses >= 3) {
         this.user.points = -1;
