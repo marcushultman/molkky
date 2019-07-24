@@ -3,17 +3,20 @@
     <input class="name" v-model="user.name">
     <h2>{{ user.points }}</h2>
     <template v-if="user.points > 50">
-      <button @click="setPoints(25)" class="reset">Reset to 25</button>
+      <button @click="setPoints(25)" class="bullet reset">Reset to 25</button>
+    </template>
+    <template v-else-if="user.points == 50">
+      <div class="bullet winner">Winner</div>
     </template>
     <template v-else>
       <button @click="addPoints(1)">👍1</button>
       <button @click="addPoints(5)">🖐5</button>
+      <button class="bullet miss" @click="miss">
+        <span>Misses:&nbsp;</span>
+        <span v-if="!user.misses">-</span>
+        <span v-for="i in user.misses" :key="i">💩</span>
+      </button>
     </template>
-    <button class="miss" @click="miss">
-      <span>Misses:&nbsp;</span>
-      <span v-if="!user.misses">0</span>
-      <span v-for="i in user.misses" :key="i">💩</span>
-    </button>
   </div>
 </template>
 
@@ -47,9 +50,13 @@ export default {
 <style scoped lang="scss">
 .row {
   display: flex;
+  margin: 8px 0;
+  align-items: center;
 }
 .name {
-  width: 96px;
+  width: 112px;
+  margin: 0;
+  padding: 0;
   font: inherit;
   font-size: 18px;
   border: none;
@@ -59,9 +66,17 @@ button, h2 {
   flex: 1;
 }
 h2 {
-  flex: auto;
   margin: 0;
-  align-self: center;
+  line-height: 32px;
+  text-align: left;
+}
+.bullet {
+  flex: 1;
+  margin: 0;
+  padding: 0 8px;
+  border: none;
+  border-radius: 8px;
+  line-height: 32px;
 }
 button {
   margin: 0;
@@ -72,10 +87,14 @@ button {
   font: inherit;
   font-size: 16px;
   background-color: white;
-  &.reset {
-    color: white;
-    background: #cc2222;
-  }
+}
+.reset {
+  color: white;
+  background: #cc2222;
+}
+.winner {
+  color: white;
+  background: #22cc22;
 }
 button:active {
   background-color: #6eb9f7;
@@ -84,9 +103,8 @@ button:active {
 }
 .miss {
   display: flex;
-  margin-left: 16px;
+  // margin-left: 16px;
   line-height: 42px;
-  min-width: 104px;
-  text-align: left;
+  min-width: 7em;
 }
 </style>
