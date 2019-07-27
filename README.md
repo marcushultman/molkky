@@ -1,5 +1,7 @@
 # molkky
 
+Mölkky counter app, available at [marcushultman.github.io/molkky](https://marcushultman.github.io/molkky).
+
 ## Project setup
 ```
 npm install
@@ -27,3 +29,9 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Deploy
+
+```console
+$ ./deploy.sh
+```
